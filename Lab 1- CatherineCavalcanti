@@ -1,1 +1,31 @@
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class BotaoConfirmar {
+    public static void main(String[] args) {
+
+    // Criação do frame principal
+        JFrame frame = new JFrame("Exemplo de Botão Confirmar");
+        frame.setSize(300, 200);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setLayout(null); // Sem layout, vamos definir manualmente a posição dos componentes
+    
+    // Criação do botão
+        JButton btnConfirmar = new JButton("Clique aqui para confirmar");
+        btnConfirmar.setBounds(50, 80, 200, 30); // Define a posição e o tamanho do botão
+
+    // Adicionando ação ao botão
+        btnConfirmar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+            System.out.println("Botão clicado!");
+            }
+        });
+    // Adicionando o botão ao frame
+        frame.add(btnConfirmar);
+    // Tornando a janela visível
+        frame.setVisible(true);
+    }
+}
 
