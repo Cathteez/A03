@@ -1,64 +1,63 @@
-import javax.swing.*;
+
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import javax.swing.*;
 
-public class AcessoAplicativo extends JFrame implements ActionListener {
-    private JTextField userField;
-    private JPasswordField passwordField;
-    private JButton confirmButton, cancelButton;
+public class SistemaPessoa extends JFrame {
 
-    public AcessoAplicativo() {
-        super("Acesso ao Aplicativo");
-        setLayout(new GridLayout(3, 2));
-
-        add(new JLabel("Usuário:"));
-        userField = new JTextField(15);
-        add(userField);
-
-        add(new JLabel("Senha:"));
-        passwordField = new JPasswordField(15);
-        add(passwordField);
-
-        confirmButton = new JButton("Confirmar");
-        confirmButton.addActionListener(this);
-        add(confirmButton);
-
-        cancelButton = new JButton("Cancelar");
-        cancelButton.addActionListener(this);
-        add(cancelButton);
-
-        setSize(400, 250);
-        setLocationRelativeTo(null);
+    public SistemaPessoa() {
+        // Configurações da Janela Principal
+        setTitle("Sistema de Pessoa");
+        setSize(600, 400);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setVisible(true);
-    }
+        setLocationRelativeTo(null); // Centraliza a janela na tela
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == confirmButton) {
-            String username = userField.getText();
-            String password = new String(passwordField.getPassword());
+        // Criação do Menu
+        JMenuBar menuBar = new JMenuBar();
 
-            if (autenticarUsuario(username, password)) {
-                JOptionPane.showMessageDialog(this, "acesso confirmado");
-                dispose();
-            } else {
-                JOptionPane.showMessageDialog(this, "usuario ou senha invalido");
-            }
-        } else if (e.getSource() == cancelButton) {
-            dispose();
-        }
-    }
+        // Menu "Cadastro"
+        JMenu cadastroMenu = new JMenu("Cadastro");
+        JMenuItem usuariosMenuItem = new JMenuItem("Usuários");
+        JMenuItem pessoasMenuItem = new JMenuItem("Pessoas");
+        cadastroMenu.add(usuariosMenuItem);
+        cadastroMenu.add(pessoasMenuItem);
 
-    private boolean autenticarUsuario(String username, String password) {
-        String usuarioCorreto = "denys.silva";
-        String senhaCorreta = "Teste@2024";
+        // Menu "Visualização"
+        JMenu visualizacaoMenu = new JMenu("Visuslização");
+        JMenuItem listaUsuariosMenuItem = new JMenuItem("Lista de Usuários");
+        JMenuItem listaPessoasMenuItem = new JMenuItem("Lista de Pessoas");
+        visualizacaoMenu.add(listaUsuariosMenuItem);
+        visualizacaoMenu.add(listaPessoasMenuItem);
 
-        return username.equals(usuarioCorreto) && password.equals(senhaCorreta);
+        // Menu "Sair"
+        JMenu sairMenu = new JMenu("Sair");
+        JMenuItem sairMenuItem = new JMenuItem("Sair");
+        sairMenuItem.addActionListener(e -> System.exit(0)); // Fecha o programa
+        sairMenu.add(sairMenuItem);
+
+        // Adicionando os menus na barra de menu
+        menuBar.add(cadastroMenu);
+        menuBar.add(visualizacaoMenu);
+        menuBar.add(sairMenu);
+
+        // Adiciona a barra de menu na janela principal
+        setJMenuBar(menuBar);
+
+        // Layout principal
+        JPanel mainPanel = new JPanel(new BorderLayout());
+
+        // Rodapé
+        JLabel rodape = new JLabel("Versão: 12.1.2024    Usuário: denys.silva    Data de acesso: 20/09/2024 10:58", JLabel.CENTER);
+        mainPanel.add(rodape, BorderLayout.SOUTH);
+
+        // Adiciona o painel principal à janela
+        add(mainPanel);
     }
 
     public static void main(String[] args) {
-        new AcessoAplicativo();
+        // Executa a aplicação
+        SwingUtilities.invokeLater(() -> {
+            SistemaPessoa frame = new SistemaPessoa();
+            frame.setVisible(true);
+        });
     }
 }
